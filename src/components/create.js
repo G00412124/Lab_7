@@ -1,25 +1,25 @@
-import axios from "axios";
-import { useState } from "react";
+import axios from "axios"; // Import axios
+import { useState } from "react"; // Import the useState hook from react
 
 const Create = () => {
 
-    const [title, setTitle] = useState('');
-    const [year, setYear] = useState('');
-    const [poster, setPoster] = useState('');
+    const [title, setTitle] = useState(''); // Create a title state variable
+    const [year, setYear] = useState(''); // Create a year state variable
+    const [poster, setPoster] = useState(''); // Create a poster state variable
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const movie = {title,year,poster};
-        console.log(movie);
+    const handleSubmit = (e) => { // Create a function called handleSubmit that takes an event as an argument
+        e.preventDefault(); // Prevent the default form submission behavior
+        const movie = {title,year,poster}; // Create a movie object with the title, year, and poster
+        console.log(movie);     
+ 
+        axios.post('http://localhost:4000/api/movies',movie)     // Make a post request to the movies endpoint with the movie object
+        .then((res)=>{console.log(res.data)}) // Log the response data to the console
+        .catch(); // Log any errors to the console
+    } 
 
-        axios.post('http://localhost:4000/api/movies',movie)
-        .then((res)=>{console.log(res.data)})
-        .catch();
-    }
-
-    return (
+    return ( // Return a form with input fields for the title, year, and poster
         <div>
-            <h3>Hello from create component!</h3>
+            <h3>Hello from create component!</h3> 
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label>Add Movie Title: </label>
@@ -46,10 +46,10 @@ const Create = () => {
                     />
                 </div>
                 <div>
-                    <input type="submit" value="Add Movie"></input>
+                    <input type="submit" value="Add Movie"></input> 
                 </div>
             </form>
         </div>
     );
 }
-export default Create;
+export default Create; // Export the Create component
